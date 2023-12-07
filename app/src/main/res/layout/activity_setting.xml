@@ -20,14 +20,16 @@
             android:layout_height="40dp"
             android:text="Tài Khoản"
             android:textColor="#F84538"
-            android:textSize="20dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/setting_Edit_Profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
+            android:textSize="15dp"
             android:text="Sửa Thông Tin"
             android:textColor="@color/white" />
 
@@ -36,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textSize="15dp"
             android:fontFamily="sans-serif-medium"
             android:text="Đổi Mật Khẩu"
             android:textColor="@color/white" />
@@ -54,7 +57,7 @@
             android:id="@+id/setting_App_Info"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="Thông Tin Chi Tiết"
             android:textColor="#F84538"
             android:textSize="20dp"
