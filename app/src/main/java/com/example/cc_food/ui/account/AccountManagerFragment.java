@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -31,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.cc_food.Admin.AdminActivity;
 import com.example.cc_food.DAO.UsersDAO;
 import com.example.cc_food.R;
 import com.example.cc_food.activities.DealsActivity;
@@ -43,10 +45,13 @@ import com.example.cc_food.modules.UsersModule;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class AccountManagerFragment extends Fragment {
-    LinearLayout logout, btnDeals, setting, btnRating, orderHistory, oder_favourite;
+    LinearLayout logout, btnDeals, setting, btnRating, orderHistory, oder_favourite ,btnThongke;
+
+    ClipData.Item myCart;
     TextView tvNameUser, tvEmail;
     ImageView imgProfile;
     String realPath = "";
@@ -120,6 +125,8 @@ public class AccountManagerFragment extends Fragment {
         }
     });
 
+
+
     @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -131,6 +138,16 @@ public class AccountManagerFragment extends Fragment {
         btnRating = root.findViewById(R.id.btn_Account_rating);
         oder_favourite = root.findViewById(R.id.oder_favourite);
         orderHistory = root.findViewById(R.id.order_history);
+        btnThongke=root.findViewById(R.id.btn_Thongke);
+
+
+
+       btnThongke.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               view.getContext().startActivity(new Intent(getContext(), AdminActivity.class));
+           }
+       });
         oder_favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +161,37 @@ public class AccountManagerFragment extends Fragment {
         tvNameUser = root.findViewById(R.id.tvNameUser);
         tvEmail = root.findViewById(R.id.tvEmail);
         SharedPreferences pref = getActivity().getSharedPreferences("USER_FILE", MODE_PRIVATE);
+
         String email = pref.getString("EMAIL", "");
+        int begin_index = email.indexOf("@");
+        int end_index = email.indexOf(".");
+        String domain_name = email.substring(begin_index + 1, end_index);
+        if (domain_name.toLowerCase(Locale.ROOT).equals("gmail")) {
+
+            oder_favourite.setVisibility(View.VISIBLE);
+            orderHistory.setVisibility(View.VISIBLE);
+            btnRating.setVisibility(View.VISIBLE);
+
+//           if (holder.btnThongke != null) {
+//               // Gọi phương thức setVisibility
+//                holder.btnThongke.setVisibility(View.VISIBLE); // hoặc View.GONE hoặc View.INVISIBLE
+//           }
+        }
+        String emailadmin = pref.getString("EMAIL", "");
+        int begin_index1 = emailadmin.indexOf("@");
+        int end_index1 = emailadmin.indexOf(".");
+        String domain_name1 = emailadmin.substring(begin_index + 1, end_index);
+        if (domain_name.toLowerCase(Locale.ROOT).equals("merchant")) {
+            btnThongke.setVisibility(View.VISIBLE);
+//            oder_favourite.setVisibility(View.GONE);
+//            orderHistory.setVisibility(View.GONE);
+//            btnRating.setVisibility(View.GONE);
+
+//           if (holder.btnThongke != null) {
+//               // Gọi phương thức setVisibility
+//                holder.btnThongke.setVisibility(View.VISIBLE); // hoặc View.GONE hoặc View.INVISIBLE
+//           }
+        }
         tvEmail.setText(email);
         orderHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,5 +321,8 @@ public class AccountManagerFragment extends Fragment {
         String email = pref.getString("EMAIL", "");
         getSetOtherData(email);
     }
+
+
+
 }
 

@@ -100,7 +100,6 @@ public class billdetail_paid_model {
         this.trangthai = trangthai;
         this.ngaymua = ngaymua;
         this.tongtiensanpham = tongtiensanpham;
-
         this.dalivery = dalivery;
         this.tongtien = tongtien;
     }

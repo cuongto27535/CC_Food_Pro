@@ -143,6 +143,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.view
                 bundle.putDouble("price", list.get(position).price);
                 bundle.putString("title", list.get(position).title);
                 intent1.putExtra("data", bundle);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent1);
             }
         });

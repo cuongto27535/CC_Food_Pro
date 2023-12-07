@@ -1,12 +1,18 @@
 package com.example.cc_food.activities;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +31,8 @@ import com.example.cc_food.Utility.NetworkChangeListener;
 import com.example.cc_food.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         // ActionBar
 //         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
        NavigationUI.setupWithNavController(binding.navView, navController);
+
 
     }
 
@@ -124,6 +133,24 @@ public class MainActivity extends AppCompatActivity {
                 }, 2000);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu  );
+
+        MenuItem item = menu.findItem(R.id.navigation_my_cart);
+
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        String email = pref.getString("EMAIL", "");
+
+        // Kiểm tra xem địa chỉ email có kết thúc bằng "gmail.com" không
+        if (email.toLowerCase(Locale.ROOT).endsWith("gmail")) {
+            // Hiển thị mục myCartItem
+            item.setVisible(true);
+        }
+
+        return true;
     }
 
 

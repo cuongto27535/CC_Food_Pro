@@ -2,6 +2,8 @@ package com.example.cc_food.adapters.item_product;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.cc_food.Admin.AdminActivity;
 import com.example.cc_food.R;
+import com.example.cc_food.activities.FavouriteActivity;
 import com.example.cc_food.activities.ShowDetailActivity;
 
 import java.util.ArrayList;
@@ -34,6 +40,8 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
     ImageView imgZoomIn;
     ArrayList<ItemProduct> list;
     ArrayList<ItemProduct> listOld;
+
+
 
     public ItemProductAdapter(Context context) {
         this.context = context;
@@ -51,7 +59,6 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_products, parent, false);
         return new viewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, @SuppressLint("RecyclerView") int position) {
         ItemProduct item = list.get(position);
@@ -62,7 +69,14 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
         String domain_name = email.substring(begin_index + 1, end_index);
         if (domain_name.toLowerCase(Locale.ROOT).equals("merchant")) {
             holder.imgDelete.setVisibility(View.VISIBLE);
+
+//           if (holder.btnThongke != null) {
+//               // Gọi phương thức setVisibility
+//                holder.btnThongke.setVisibility(View.VISIBLE); // hoặc View.GONE hoặc View.INVISIBLE
+//           }
         }
+
+
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +90,9 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
         if (item == null) {
             return;
         }
+
+
+
         holder.img.setImageResource(item.getImg());
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +162,7 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
 
     }
 
+
     @Override
     public int getItemCount() {
         if (list != null) {
@@ -156,7 +174,7 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
     public class viewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvPrice;
         ImageView img, imgAdd, imgDelete, imgFavourite;
-
+       LinearLayout btnThongke;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -166,6 +184,8 @@ public class ItemProductAdapter extends RecyclerView.Adapter<ItemProductAdapter.
             imgAdd = itemView.findViewById(R.id.imgAdd);
             imgDelete = itemView.findViewById(R.id.imgDeleteItemProduct);
             imgFavourite = itemView.findViewById(R.id.imgFavouriteProduct);
+            btnThongke=itemView.findViewById(R.id.btn_Thongke);
+
 
         }
     }

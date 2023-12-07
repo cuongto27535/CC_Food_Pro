@@ -166,6 +166,8 @@ public class PaymentActivity extends AppCompatActivity {
                     double voucher = total * discount /100;
                     tvValueVoucher.setText("- " + String.format("%.2f", voucher));
                     tvToTalCost.setText(String.format("%.2f", (total-voucher)));
+
+
                 }
 
             }

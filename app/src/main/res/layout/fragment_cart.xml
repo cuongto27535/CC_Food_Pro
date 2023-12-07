@@ -67,12 +67,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView19"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="47dp"
-                app:layout_constraintStart_toEndOf="@+id/textView20"
-                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
